@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link href="style.css" rel="stylesheet"/>
+        <title>Cryptocurrency wallet</title>
+    </head>
+    <body>
+        <div class="page">
+            <ul class="navbar">
+                <li class="navitem active">ETH</li>
+                <li class="navitem">ERC20</li>
+                <li class="navitem">BTC</li>
+            </ul>
+        </div>
+        <div class="container">
+            <div class="wrapper">
+                <div class="balances">
+                    <div class="tokenName">Ethereum</div>
+                    <div class="balanceItem">
+                        Balance: <span>4,1250</span> ETH
+                    </div>
+                </div>
+                <div class="accountInfo">
+                    <div class="accountLabel">Account: </div>
+                    <div class="accountAddress">0x000000000000000000000000000000</div>
+                </div>
+                <div class="sendCoin">
+                    <div class="sendLabel">Send:</div>
+                    <div class="sendInput">
+                        <input type="text" placeholder="Receiver"/>
+                        <input type="number" min="0" placeholder="Amount"/>
+                    </div>
+                    <button>Send</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
