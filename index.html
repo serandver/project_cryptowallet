@@ -14,26 +14,28 @@
             </ul>
         </div>
         <div class="container">
-            <div class="wrapper">
+            <div id="ethWrapper" class="wrapper">
                 <div class="balances">
                     <div class="tokenName">Ethereum</div>
                     <div class="balanceItem">
-                        Balance: <span>4,1250</span> ETH
+                        Balance: <span id="ethBalance">-.------</span> ETH
                     </div>
                 </div>
                 <div class="accountInfo">
                     <div class="accountLabel">Account: </div>
-                    <div class="accountAddress">0x000000000000000000000000000000</div>
+                    <div id="ethAccount" class="accountAddress">0x000000000000000000000000000000</div>
                 </div>
                 <div class="sendCoin">
                     <div class="sendLabel">Send:</div>
                     <div class="sendInput">
-                        <input type="text" placeholder="Receiver"/>
-                        <input type="number" min="0" placeholder="Amount"/>
+                        <input type="text" id="ethSendTo" placeholder="Receiver"/>
+                        <input type="number" id="ethSendAmount" min="0" placeholder="Amount"/>
                     </div>
-                    <button>Send</button>
+                    <button id="sendButton">Send</button>
                 </div>
             </div>
         </div>
+        <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+        <script src="index.js"></script>
     </body>
 </html>
