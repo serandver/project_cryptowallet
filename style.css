@@ -46,8 +46,8 @@ body {
     height: calc(100vh - 40px);
 }
 
-.wrapper {
-    display: flex;
+.wrapper  {
+    display: none;
     flex-direction: column;
     justify-content: stretch;
     padding: 26px 12px;
@@ -55,6 +55,32 @@ body {
     border-radius: 8px;
     width: 600px;
     background-color: wheat;
+}
+
+.connectWrapper {
+    display: none;
+    flex-direction: column;
+    justify-content: stretch;
+    border-radius: 8px;
+    width: 300px;
+}
+
+.connectWrapper button {
+    background: wheat;
+    border: 2px solid cyan;
+    margin-bottom: 20px;
+    padding: 12px 12px;
+    cursor: pointer;
+}
+
+.connectWrapper button:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+    border-color: transparent;
+}
+
+.wrapper.active, .connectWrapper.active {
+    display: flex;
 }
 
 .balances, .accountInfo, .sendCoin {
@@ -106,4 +132,16 @@ body {
     font-size: 20px;
     cursor: pointer;
     background: white;
+}
+
+#transactionLink {
+    display: none;
+}
+
+#transactionLink.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid cyan;
+    color: black;
 }
