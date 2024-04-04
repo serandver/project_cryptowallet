@@ -8,9 +8,9 @@
     <body>
         <div class="page">
             <ul class="navbar">
-                <li class="navitem active">ETH</li>
-                <li class="navitem">ERC20</li>
-                <li class="navitem">BTC</li>
+                <li class="navitem active" id="ethSwitcher">ETH</li>
+                <li class="navitem" id="erc20Switcher">ERC20</li>
+                <li class="navitem" id="btcSwitcher">BTC</li>
             </ul>
         </div>
         <div class="container">
@@ -32,6 +32,27 @@
                         <input type="number" id="ethSendAmount" min="0" placeholder="Amount"/>
                     </div>
                     <button id="sendButton">Send</button>
+                    <a id="transactionLink" href="#"></a> 
+                </div>
+            </div>
+            <div id="erc20Wrapper" class="wrapper">
+                <div class="balances">
+                    <div class="tokenName" id="erc20Name">------</div>
+                    <div class="balanceItem">
+                        Balance: <span id="erc20Balance">-.------</span> <span id="erc20Symbol">---</span>
+                    </div>
+                </div>
+                <div class="accountInfo">
+                    <div class="accountLabel">Account: </div>
+                    <div id="erc20Account" class="accountAddress">0x000000000000000000000000000000</div>
+                </div>
+                <div class="sendCoin">
+                    <div class="sendLabel">Send:</div>
+                    <div class="sendInput">
+                        <input type="text" id="erc20SendTo" placeholder="Receiver"/>
+                        <input type="number" id="erc20SendAmount" min="0" placeholder="Amount"/>
+                    </div>
+                    <button id="erc20SendButton">Send</button>
                     <a id="transactionLink" href="#"></a> 
                 </div>
             </div>
