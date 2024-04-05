@@ -485,7 +485,8 @@ const ethSendToAddress = document.getElementById("ethSendTo");
 const ethSendAmount = document.getElementById("ethSendAmount");
 const sendButton = document.getElementById("sendButton");
 const ethCurrency = " ETH";
-const transactionLink = document.getElementById("transactionLink");
+const ethTransactionLink = document.getElementById("ethTransactionLink");
+const erc20TransactionLink = document.getElementById("erc20TransactionLink");
 
 //ERC20 part
 const erc20Balance = document.getElementById("erc20Balance");
@@ -550,13 +551,13 @@ const onSendEth = async () => {
     alert("hash: " + tx.hash);
     const result = await tx.wait();
     const dynamicURL = "https://sepolia.etherscan.io/tx/" + tx.hash;
-    transactionLink.classList.add('active');
-    transactionLink.href = dynamicURL;
-    transactionLink.innerText = 'You can find your tx here'; 
+    ethTransactionLink.classList.add('active');
+    ethTransactionLink.href = dynamicURL;
+    ethTransactionLink.innerText = 'You can find your transaction here'; 
     console.log("result: " + result);
-    await prepareEthWrapper();
     ethSendToAddress.value = '';
-    sendAmountValue.value = '';
+    ethSendAmount.value = '';
+    await prepareEthWrapper();
 }
 
 const onSendErc20 = async () => {
@@ -568,10 +569,16 @@ const onSendErc20 = async () => {
         const tx = await ERC20Contract.transfer(sendToValue, sendAmountValue);
         console.log("Transaction hash: " + tx.hash);
         const result = await tx.wait();
-        console.log("Transaction recept: " + result);
-        prepareErc20Wrapper();
+        console.log("Transaction receipt: " + result);
+        alert("hash: " + tx.hash);
+        const dynamicURL = "https://sepolia.etherscan.io/tx/" + tx.hash;
+        erc20TransactionLink.classList.add('active');
+        erc20TransactionLink.href = dynamicURL;
+        erc20TransactionLink.innerText = 'You can find your transaction here'; 
+        console.log("result: " + result);
         erc20SendAmount.value = "";
-        sendToValue.value = "";
+        erc20SendTo.value = "";
+        prepareErc20Wrapper();
     } catch (e) {
         console.error(e);
     }

@@ -134,14 +134,19 @@ body {
     background: white;
 }
 
-#transactionLink {
+#ethTransactionLink, #erc20TransactionLink {
     display: none;
 }
 
-#transactionLink.active {
+#ethTransactionLink.active, #erc20TransactionLink.active {
     display: flex;
     align-items: center;
     justify-content: center;
     border: 2px solid cyan;
+    background: white;
+    margin: 20px auto;
+    padding: 10px;
     color: black;
+    border-radius: 8px;
+    text-decoration: none;
 }
