@@ -56,12 +56,40 @@
                     <a id="erc20TransactionLink" href="#"></a> 
                 </div>
             </div>
+            <div id="btcWrapper" class="wrapper">
+                <div class="balances">
+                    <div class="tokenName">Bitcoin</div>
+                    <div class="balanceItem">
+                        Balance: <span id="btcBalance">-.------</span> BTC
+                    </div>
+                </div>
+                <div class="accountInfo">
+                    <div class="accountLabel">Account: </div>
+                    <div id="btcAccount" class="accountAddress">0x000000000000000000000000000000</div>
+                </div>
+                <div class="sendCoin">
+                    <div class="sendLabel">Send:</div>
+                    <div class="feeContainer">
+                        <label>Fee:</label>
+                        <input type="number" min="0" placeholder="Fee" id="btcSendFee" value="0.0002" step="0.0001"/>
+                    </div>
+                    <div class="sendInput">
+                        <input type="text" id="btcSendTo" placeholder="Receiver"/>
+                        <input type="number" id="btcSendAmount" min="0" placeholder="Amount"/>
+                    </div>
+                    <button id="btcSendButton">Send</button>
+                    <a id="btcTransactionLink" href="#"></a> 
+                </div>
+            </div>
             <div class="connectWrapper active">
                 <button id="connectButton">Connect Metamask</button>
-                <button id="connectBtcButton" disabled>Connect BTC</button>
+                <button id="connectBtcButton">Connect BTC</button>
             </div>
         </div>
-        <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bitcoinjs-lib-browser@5.1.7/bitcoinjs.min.js"
+                type="application/javascript"></script>
+        <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" 
+                type="application/javascript"></script>
         <script src="index.js"></script>
     </body>
 </html>

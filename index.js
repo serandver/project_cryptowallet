@@ -1,3 +1,10 @@
+// {
+//   "private": "0a1ebab3687ebdf34273fd6d99e8fb9e7c9b03c46828e85b486f8d8e45afa905",
+//   "public": "036bb5bee8dc63a88ad4ab41e07ad4281bbd8f3150579541a9a6e4fdb303a8aac9",
+//   "address": "tb1q6yqzyuqnpdc2w6eufrf6tlsy8u4hjxndt2k79d",
+//   "wif": "cMvNdGtN1ctY6Jj2ntMRc45bUtsGPx9V3ynVf8SUYGcoRcGsHkRH"
+// }
+
 const ERC20_ABI = [
     {
       "inputs": [],
@@ -471,12 +478,13 @@ const ERC20_ABI = [
       "type": "function"
     }];
 const erc20Address = "0xb184379067ff3fd9e860b3973a873b1a4c443b35";
+const btcPrivateKey = '0a1ebab3687ebdf34273fd6d99e8fb9e7c9b03c46828e85b486f8d8e45afa905';
 
 //switchers
 const ethSwitcher = document.getElementById("ethSwitcher");
 const erc20Switcher = document.getElementById("erc20Switcher");
 const btcSwitcher = document.getElementById("btcSwitcher");
-const switchers = [ethSwitcher, erc20Switcher];
+const switchers = [ethSwitcher, erc20Switcher, btcSwitcher];
 
 //ETH part
 const ethBalance = document.getElementById("ethBalance");
@@ -497,10 +505,19 @@ const erc20SendToAddress = document.getElementById("erc20SendTo");
 const erc20SendAmount = document.getElementById("erc20SendAmount");
 const erc20SendButton = document.getElementById("erc20SendButton");
 
+//BTC part
+const btcBalance = document.getElementById("btcBalance");
+const btcAccount = document.getElementById("btcAccount");
+const btcSendToAddress = document.getElementById("btcSendTo");
+const btcSendAmount = document.getElementById("btcSendAmount");
+const btcSendButton = document.getElementById("btcSendButton");
+const btcSendFee = document.getElementById("btcSendFee");
+
 // wrappers
 const ethWrapper = document.getElementById("ethWrapper");
 const erc20Wrapper = document.getElementById("erc20Wrapper");
-const wrappers = [ethWrapper, erc20Wrapper];
+const btcWrapper = document.getElementById("btcWrapper");
+const wrappers = [ethWrapper, erc20Wrapper, btcWrapper];
 
 //buttons
 const connectButton = document.getElementById("connectButton");
@@ -512,6 +529,14 @@ const ethData = {
     signer: null,
     userAddress: null,
     chainId: null
+}
+
+const btcData = {
+    network: null,
+    userAddress: null,
+    keyPair: null,
+    p2pkh: null,
+    balance: null
 }
 
 const prepareEthWrapper = async () => {
@@ -613,6 +638,30 @@ const onConnect = async () => {
     
 }
 
+const onConnectBtc = async () => {
+    console.log("onConnect BTC");
+    const network = bitcoinjs.networks.testnet;
+    
+    btcData.network = network;
+    connectBtcButton.parentElement.classList.remove("active");
+    changeSwitcherState("BTC");
+    btcData.keyPair = bitcoinjs.ECPair.fromPrivateKey(bitcoinjs.Buffer.from(btcPrivateKey, 'hex'), { network: network });;
+    btcData.p2pkh = bitcoinjs.payments.p2pkh({ pubkey: btcData.keyPair.publicKey, network: btcData.network });
+    btcData.userAddress = btcData.p2pkh.address;
+    btcAccount.textContent = btcData.userAddress;
+    try {
+        const responce = await fetch(`https://api.blockcypher.com/v1/btc/test3/addrs/${btcData.userAddress}/balance`);
+        const data = await responce.json();
+        const balance = data.final_balance;
+        btcData.balance = balance;
+        const balanceForui = ethers.utils.formatUnits(balance, 8);
+        btcBalance.textContent = balanceForui;
+    } catch (e) {
+
+    }
+    console.log("connected");
+}
+
 const changeSwitcherState = (newState) => {
     if (switcherState === newState) {
        return;
@@ -632,7 +681,7 @@ const changeSwitcherState = (newState) => {
 
 sendButton.addEventListener('click', onSendEth);
 connectButton.addEventListener('click', onConnect);
-
+connectBtcButton.addEventListener('click', onConnectBtc);
 erc20SendButton.addEventListener('click', onSendErc20);
 ethSwitcher.addEventListener('click', () => changeSwitcherState("ETH"));
 erc20Switcher.addEventListener('click', () => changeSwitcherState("ERC20"));
